@@ -527,6 +527,19 @@ button:hover {
     to { transform: translateY(110vh); }
 }
 
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 5;
+    font-family: 'Poppins', sans-serif;
+}
+
 /* Media Queries pour Responsivité */
 
 /* Tablettes et petits écrans */

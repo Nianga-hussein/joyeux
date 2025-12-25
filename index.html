@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Noël - Diagnostika</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Polices festives -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Audio Files -->
+    <audio id="santa-voice" src="VOXMale_Pere%20noel%20oh%20oh%20oh%204%20(ID%202077)_LaSonotheque.fr.mp3"></audio>
+    <audio id="music-box" src="MUSCKeyd_Boite%20a%20musique%20white%20christmas%20(ID%200465)_LaSonotheque.fr.mp3"></audio>
+
+    <div class="snow-container"></div>
+
+    <!-- Écran 1 : Formulaire d'entrée -->
+    <div class="container" id="login-screen">
+        <div class="card glass">
+            <h1>Bienvenue</h1>
+            <p>Veuillez entrer votre nom pour entrer dans l'esprit de Noël</p>
+            <div class="input-group">
+                <input type="text" id="name-input" placeholder="Votre nom..." autocomplete="off">
+                <button id="enter-btn">Entrer 🎄</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran 2 : La célébration -->
+    <div class="container hidden" id="christmas-screen">
+        
+        <!-- Le Traîneau Volant -->
+        <div class="flying-santa-container hidden" id="sleigh-container">
+            <div class="reindeer-group">
+                <div class="reindeer">🦌</div>
+                <div class="reindeer">🦌</div>
+                <div class="reindeer">🦌</div>
+            </div>
+            <div class="sleigh-group">
+                <div class="sleigh">🛷</div>
+                <div class="santa-driver">🎅</div>
+            </div>
+            <div class="speech-bubble">Ouvre ton cadeau !</div>
+        </div>
+
+        <!-- Le Père Noël et Cadeau (Statique/Interaction) -->
+        <div class="santa-container hidden" id="santa-interaction">
+            <div class="gift-box hidden" id="gift-box">
+                <div class="gift-lid"></div>
+                <div class="gift-body">🎁</div>
+                <div class="open-me-hint">Ouvre-moi !</div>
+            </div>
+        </div>
+
+        <div class="christmas-scene">
+            <div class="star"></div>
+            <div class="tree">
+                <div class="layer layer-1"></div>
+                <div class="layer layer-2"></div>
+                <div class="layer layer-3"></div>
+                <div class="bauble b1"></div>
+                <div class="bauble b2"></div>
+                <div class="bauble b3"></div>
+                <div class="bauble b4"></div>
+                <div class="bauble b5"></div>
+                <div class="bauble b6"></div>
+            </div>
+            <div class="trunk"></div>
+            <div class="shadow"></div>
+        </div>
+        
+        <div class="message-box glass">
+            <h2 class="title-font">Joyeux Noël !</h2>
+            <p class="greeting-text">L'équipe <span class="highlight">Diagnostika</span> vous souhaite de joyeuses fêtes, <span id="user-name-display"></span> !</p>
+            <div id="prediction-container" class="hidden">
+                <p class="prediction-label">✨ Votre prédiction pour 2026 ✨</p>
+                <p id="prediction-text" class="prediction-text"></p>
+            </div>
+            <p class="sub-text" id="instruction-text">Le Père Noël a un cadeau pour toi... Clique dessus !</p>
+        </div>
+        
+        <button id="back-btn" class="secondary-btn">Retour</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

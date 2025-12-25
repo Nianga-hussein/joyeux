@@ -1,0 +1,635 @@
+:root {
+    --primary-red: #c0392b;
+    --tree-green: #27ae60;
+    --tree-dark: #1e824c;
+    --gold: #f1c40f;
+    --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    color: white;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* Utilitaires */
+.hidden {
+    display: none !important;
+}
+
+.title-font {
+    font-family: 'Mountains of Christmas', cursive;
+    font-weight: 700;
+}
+
+/* Conteneur principal */
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    z-index: 10;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Glassmorphism Card */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Login Screen Styles */
+#login-screen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-family: 'Mountains of Christmas', cursive;
+    color: var(--gold);
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+}
+
+.input-group {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+input {
+    padding: 15px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    width: 80%;
+    font-size: 1rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s;
+}
+
+input:focus {
+    transform: scale(1.05);
+}
+
+button {
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    background: var(--primary-red);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+}
+
+button:hover {
+    background: #e74c3c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.6);
+}
+
+/* Sleigh Animation */
+.flying-santa-container {
+    position: fixed;
+    top: 15%;
+    left: -100%;
+    display: flex;
+    align-items: flex-end;
+    z-index: 100;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+.flying-santa-container.flying {
+    animation: flyAcross 12s linear forwards;
+}
+
+/* Reindeer Styling */
+.reindeer-group {
+    display: flex;
+    gap: 15px;
+    margin-right: 20px;
+}
+
+.reindeer {
+    font-size: 50px;
+    transform: scaleX(-1); 
+    animation: gallop 0.6s ease-in-out infinite alternate;
+}
+
+.reindeer:nth-child(2) { animation-delay: 0.2s; }
+.reindeer:nth-child(3) { animation-delay: 0.4s; }
+
+/* Sleigh and Santa Styling */
+.sleigh-group {
+    position: relative;
+    transform: scaleX(-1) rotate(-10deg);
+}
+
+.sleigh {
+    font-size: 70px;
+    z-index: 2;
+}
+
+.santa-driver {
+    font-size: 50px;
+    position: absolute;
+    right: 15px;
+    bottom: 25px;
+    z-index: 1;
+    animation: hohoho 2s ease-in-out infinite;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    background: white;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-family: 'Mountains of Christmas', cursive;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.5s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.speech-bubble.visible {
+    opacity: 1;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent;
+}
+
+/* The Flight Path Animation */
+@keyframes flyAcross {
+    0% {
+        left: -50%;
+        top: 20%;
+        transform: scale(0.8) rotate(5deg);
+    }
+    20% {
+        top: 10%;
+    }
+    40% {
+        top: 25%;
+    }
+    60% {
+        top: 15%;
+    }
+    80% {
+        top: 20%;
+    }
+    100% {
+        left: 110%;
+        top: 10%;
+        transform: scale(0.8) rotate(-5deg);
+    }
+}
+
+/* Galloping Motion */
+@keyframes gallop {
+    from { transform: scaleX(-1) translateY(0); }
+    to { transform: scaleX(-1) translateY(-10px); }
+}
+
+/* Santa Movement */
+@keyframes hohoho {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Santa Interaction Container (Statique) */
+.santa-container {
+    position: relative;
+    height: 120px;
+    margin-bottom: 20px;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Media Query Updates */
+@media (max-width: 768px) {
+    .flying-santa-container {
+        transform: scale(0.5);
+        top: 10%;
+    }
+    
+    @keyframes flyAcross {
+        0% { left: -100%; top: 15%; transform: scale(0.5) rotate(5deg); }
+        100% { left: 150%; top: 10%; transform: scale(0.5) rotate(-5deg); }
+    }
+}
+
+/* Gift Box Styles */
+.gift-box {
+    position: fixed; /* Changed to fixed for center screen positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Start hidden/small */
+    font-size: 60px;
+    cursor: pointer;
+    transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy effect */
+    z-index: 1000; /* Top priority */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift-box.visible {
+    transform: translate(-50%, -50%) scale(4); /* Big zoom */
+}
+
+.gift-box:hover {
+    animation: shake 0.5s infinite;
+}
+
+.gift-lid {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+}
+
+.open-me-hint {
+    position: absolute;
+    bottom: -30px;
+    font-size: 14px; /* Relative to the scaled gift (60px * 4 = 240px gift, so 14px is small) - let's adjust */
+    font-size: 0.3em; /* Relative to font-size of container */
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    animation: bounce 1s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(5px); }
+}
+
+/* Prediction Styles */
+.prediction-label {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-family: 'Mountains of Christmas', cursive;
+    font-weight: 700;
+}
+
+.prediction-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.3);
+    animation: glow-text 2s infinite alternate;
+}
+
+/* Animations Spéciales */
+@keyframes hover {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(20deg); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(5deg); }
+    50% { transform: translateX(-50%) rotate(0deg); }
+    75% { transform: translateX(-50%) rotate(-5deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes glow-text {
+    from { box-shadow: 0 0 10px rgba(241, 196, 15, 0.3); }
+    to { box-shadow: 0 0 25px rgba(241, 196, 15, 0.6); }
+}
+
+/* Confettis (simple particules) */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    animation: confetti-fall 1s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
+}
+
+/* Christmas Scene Styles */
+.christmas-scene {
+    position: relative;
+    height: 300px;
+    width: 200px;
+    margin: 0 auto 30px auto;
+}
+
+/* Le Sapin CSS */
+.tree {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: solid transparent;
+    border-right: solid transparent;
+    border-bottom: solid var(--tree-green);
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+}
+
+.layer-1 {
+    bottom: 80px;
+    border-left-width: 40px;
+    border-right-width: 40px;
+    border-bottom-width: 60px;
+    z-index: 3;
+    border-bottom-color: #2ecc71;
+}
+
+.layer-2 {
+    bottom: 40px;
+    border-left-width: 60px;
+    border-right-width: 60px;
+    border-bottom-width: 80px;
+    z-index: 2;
+}
+
+.layer-3 {
+    bottom: 0;
+    border-left-width: 80px;
+    border-right-width: 80px;
+    border-bottom-width: 100px;
+    z-index: 1;
+    border-bottom-color: var(--tree-dark);
+}
+
+.trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 25px;
+    background: #5d4037;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 40px;
+    z-index: 4;
+    filter: drop-shadow(0 0 10px var(--gold));
+    animation: glow 1.5s infinite alternate;
+}
+
+.star::before {
+    content: '★';
+}
+
+/* Boules de Noël */
+.bauble {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 4;
+    animation: twinkle 2s infinite;
+}
+
+.b1 { background: #e74c3c; bottom: 100px; left: -10px; }
+.b2 { background: #f1c40f; bottom: 90px; left: 15px; animation-delay: 0.5s; }
+.b3 { background: #3498db; bottom: 60px; left: -25px; animation-delay: 1s; }
+.b4 { background: #9b59b6; bottom: 50px; left: 20px; animation-delay: 0.2s; }
+.b5 { background: #e67e22; bottom: 20px; left: -35px; animation-delay: 1.5s; }
+.b6 { background: #e74c3c; bottom: 25px; left: 30px; animation-delay: 0.8s; }
+
+/* Message Box */
+.message-box h2 {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.greeting-text {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    color: #e74c3c;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.secondary-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 1px solid white;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.secondary-btn:hover {
+    background: white;
+    color: #333;
+}
+
+/* Animations */
+@keyframes glow {
+    from { text-shadow: 0 0 10px var(--gold); transform: translateX(-50%) scale(1); }
+    to { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); transform: translateX(-50%) scale(1.2); }
+}
+
+@keyframes twinkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Snow Particles (générés par JS ou CSS simple) */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+/* Media Queries pour Responsivité */
+
+/* Tablettes et petits écrans */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .glass {
+        padding: 20px;
+    }
+
+    #login-screen h1 {
+        font-size: 2rem;
+    }
+
+    .christmas-scene {
+        height: 250px;
+        transform: scale(0.9);
+    }
+    
+    .message-box h2 {
+        font-size: 2.5rem;
+    }
+    
+    .prediction-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start; /* Permet le scroll si le contenu est trop long */
+        overflow-y: auto; /* Active le scroll vertical */
+    }
+
+    .container {
+        padding: 15px 10px;
+        margin-top: 20px;
+    }
+
+    .glass {
+        padding: 20px 15px;
+    }
+
+    #login-screen h1 {
+        font-size: 1.8rem;
+    }
+
+    .input-group {
+        margin-top: 20px;
+    }
+
+    input {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    /* Ajustement de la scène de Noël */
+    .christmas-scene {
+        height: 200px;
+        margin-bottom: 10px;
+        transform: scale(0.8);
+    }
+
+    /* Ajustement du Père Noël */
+    .santa-container {
+        height: 80px;
+    }
+    
+    .santa {
+        font-size: 60px;
+    }
+    
+    .santa-hand {
+        font-size: 30px;
+    }
+    
+    .gift-box {
+        font-size: 50px;
+    }
+
+    /* Ajustement des textes */
+    .message-box h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .greeting-text {
+        font-size: 1rem;
+    }
+    
+    .prediction-label {
+        font-size: 1rem;
+    }
+    
+    .prediction-text {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+    
+    .sub-text {
+        font-size: 0.9rem;
+    }
+}
